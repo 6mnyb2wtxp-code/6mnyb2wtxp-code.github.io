@@ -6,6 +6,7 @@
 // - describe what you did to take this project "above and beyond"
 
 let Color = (25, 25, 100);
+let shapenum = 0 ;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -14,40 +15,6 @@ function setup() {
 }
 
 function draw() {
-  
+  text(`The selected shape is  ${shapenum}` , 75, 75);
 }
 
-
-
-function mouseClicked() {
-  drawRect();
-  drawCircle();
-  blackScreen();
-  whiteScreen ();
-} 
-
-function drawRect() {
-  if (keyIsDown(82)) {
-    fill(Color);
-    rect(mouseX, mouseY, 100, 50);
-  }
-}
-
-function drawCircle() {
-  if (keyIsDown(67)) {
-    fill(Color);
-    circle(mouseX, mouseY, 100);
-  }
-}
-
-function blackScreen() {
-  if (keyIsDown(66)) {
-    background(0);
-  }
-}
-
-function whiteScreen () {
-  if (keyIsDown(87)) {
-    background(255);
-  }
-}
