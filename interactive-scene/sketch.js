@@ -5,20 +5,21 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
+let Color = (25, 25, 100);
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  
+  noStroke();
   background(220);
 }
 
 function draw() {
-  mouseClicked();
+  
 }
 
 
 
-function mouseClicked(){
+function mouseClicked() {
   drawRect();
   drawCircle();
   blackScreen();
@@ -27,14 +28,14 @@ function mouseClicked(){
 
 function drawRect() {
   if (keyIsDown(82)) {
-    fill("red");
+    fill(Color);
     rect(mouseX, mouseY, 100, 50);
   }
 }
 
 function drawCircle() {
   if (keyIsDown(67)) {
-    fill("blue");
+    fill(Color);
     circle(mouseX, mouseY, 100);
   }
 }
@@ -47,6 +48,6 @@ function blackScreen() {
 
 function whiteScreen () {
   if (keyIsDown(87)) {
-    background(255)
+    background(255);
   }
 }
