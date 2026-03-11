@@ -1,13 +1,13 @@
-// Project Title
-// Your Name
-// Date
+// Interactive Scene
+// Zeyad Mohamed
+// 11/3/26
 //
 // Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+// - Added a text that shows what tool is currently selected
 
 
 let Color = 255;
-let backgroundColor = 0
+let backgroundColor = 0;
 let shapeNum = 0 ;
 let objectSize = 100;
 
@@ -18,7 +18,7 @@ function setup() {
 }
 
 function draw() {
-   // Drawing functions
+  // Drawing functions
   chooseShape();
   drawSelected();
   
@@ -30,6 +30,16 @@ function draw() {
   textSize(32);
   fill("white");
   text(`The selected shape is  ${shapeNum}` , 50, 50);
+}
+
+function mouseWheel(event) {
+  // Changes the size of objects using the scroll wheel
+  if (event.delta > 0) {
+    objectSize += 5;
+  }
+  else {
+    objectSize -= 5;
+  }
 }
 
 function chooseShape() {
@@ -53,34 +63,30 @@ function chooseShape() {
 }
 
 function drawSelected() {
-    // Pencil (0) 
+  // Pencil (0) 
   if (mouseIsPressed && mouseY > 70) {
     if (shapeNum === 0) {
-      objectSize = 5;
       fill(Color);
       rectMode(CENTER);
-      circle(mouseX, mouseY, objectSize);
+      circle(mouseX, mouseY, objectSize - 90);
     }
     // Rectangle (1)
     else if (shapeNum === 1) {
-      objectSize = 100;
       fill(Color);
       rectMode(CENTER);
       rect(mouseX, mouseY, objectSize, objectSize/2);
     }
     // Circle (2)
     if (shapeNum === 2) {
-      objectSize = 50;
       fill(Color);
       rectMode(CENTER);
-      circle(mouseX, mouseY, objectSize);
+      circle(mouseX, mouseY, objectSize - 50);
     }
     // Eraser (3)
     if (shapeNum === 3) {
-      objectSize = 50;
       fill(backgroundColor);
       rectMode(CENTER);
-      circle(mouseX, mouseY, objectSize);
+      circle(mouseX, mouseY, objectSize - 50);
     }
   }
 }
