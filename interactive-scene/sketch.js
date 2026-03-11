@@ -5,36 +5,82 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
-let Color = (25, 25, 100);
+
+let Color = 255;
+let backgroundColor = 0
 let shapeNum = 0 ;
+let objectSize = 100;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   noStroke();
-  background(0);
+  background(backgroundColor);
 }
 
 function draw() {
-  //display what shape is selected
+   // Drawing functions
   chooseShape();
+  drawSelected();
+  
+  // info bar  
+  fill(backgroundColor);
+  rect(0, 0, width, 70);
+
+  // Display what shape is selected
   textSize(32);
   fill("white");
-  text(`The selected shape is  ${shapeNum}` , 75, 75);
+  text(`The selected shape is  ${shapeNum}` , 50, 50);
 }
 
 function chooseShape() {
-  if (keyIsDown(82)) {
+  // P for Pencil
+  if (keyIsDown(80)) {
+    shapeNum = 0;
+  }
+  // R for Rectangle
+  else if (keyIsDown(82)) {
     shapeNum = 1;
   }
+  // C for cirlcle
   else if (keyIsDown(67)) {
     shapeNum = 2;
   }
+  // E is for Eraser
+  else if (keyIsDown(69)) {
+    shapeNum = 3;
+  }
+  
 }
 
-// put in function 
-if (mouseIsPressed) {
-  if (shapeNum === 1) {
-    fill(Color);
-    rect(mouseX, mouseY, 100, 50);
+function drawSelected() {
+    // Pencil (0) 
+  if (mouseIsPressed && mouseY > 70) {
+    if (shapeNum === 0) {
+      objectSize = 5;
+      fill(Color);
+      rectMode(CENTER);
+      circle(mouseX, mouseY, objectSize);
+    }
+    // Rectangle (1)
+    else if (shapeNum === 1) {
+      objectSize = 100;
+      fill(Color);
+      rectMode(CENTER);
+      rect(mouseX, mouseY, objectSize, objectSize/2);
+    }
+    // Circle (2)
+    if (shapeNum === 2) {
+      objectSize = 50;
+      fill(Color);
+      rectMode(CENTER);
+      circle(mouseX, mouseY, objectSize);
+    }
+    // Eraser (3)
+    if (shapeNum === 3) {
+      objectSize = 50;
+      fill(backgroundColor);
+      rectMode(CENTER);
+      circle(mouseX, mouseY, objectSize);
+    }
   }
 }
