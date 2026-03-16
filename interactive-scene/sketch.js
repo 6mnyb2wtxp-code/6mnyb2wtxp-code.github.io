@@ -90,7 +90,7 @@ function chooseColor() {
   else if (keyIsDown(48)) {
     Color = 255 * 1;
   }
-infoBar();
+  infoBar();
 }
 
 function drawSelected() {
