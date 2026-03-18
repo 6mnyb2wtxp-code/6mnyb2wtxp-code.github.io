@@ -7,6 +7,9 @@
 let X = width/2;
 let Y = length/2;
 let playerSize = 50;
+let redHeart;
+
+redHeart = loadImage('red-heart.png');
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -15,7 +18,6 @@ function setup() {
 function draw() {
   background(0);
   
-  fill(255);
-  circle(X, Y, playerSize);
+  image(redHeart, mouseX, mouseY);
   
 }
