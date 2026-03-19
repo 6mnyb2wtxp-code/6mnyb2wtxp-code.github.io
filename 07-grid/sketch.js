@@ -1,13 +1,15 @@
 // Grid demo
 // 2d arrays
 
-let theGrid = [[0, 0, 1, 0],
-               [, 0, 1, 0],
-               [0, 1, 0, 1],
-               [0, 0, 0, 0]];
+// let theGrid = [[0, 0, 1, 0],
+//                [0, 0, 1, 0],
+//                [0, 1, 0, 1],
+//                [0, 0, 0, 0]];
 
-const SQUARE_DIMENTIONS = theGrid.length;
+// const SQUARE_DIMENTIONS = theGrid.length;
 
+let theGrid;
+const SQUARE_DIMENTIONS = 10;
 let cellSize;
 
 function setup() {
@@ -18,7 +20,7 @@ function setup() {
   else {
     cellSize = height / SQUARE_DIMENTIONS;
   }
-  
+  theGrid = generateRandomGrid(SQUARE_DIMENTIONS, SQUARE_DIMENTIONS);
 }
 
 function draw() {
@@ -40,8 +42,10 @@ function showGrid() {
   }
 }
 
-// function mouseClicked() {
-//   if (mouseX === cellSize){
-//     theGrid 
-//   }
-// }
+function mousePressed() {
+  let x = Math.floor(mouseX/cellSize);
+  let y = Math.floor(mouseY/cellSize);
+
+  toggleCell(x, y);
+}
+
