@@ -4,12 +4,13 @@
 //
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
-let X = width/2;
-let Y = length/2;
-let playerSize = 50;
-let redHeart;
 
-redHeart = loadImage('red-heart.png');
+let playerSize = 50;
+let spaceship;
+
+function preload() {
+  spaceship = loadImage('spaceship.png');
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -18,6 +19,6 @@ function setup() {
 function draw() {
   background(0);
   
-  image(redHeart, mouseX, mouseY);
+  image(spaceship, mouseX - 50 / 2, mouseY - 50 / 2, 50, 50);
   
 }
