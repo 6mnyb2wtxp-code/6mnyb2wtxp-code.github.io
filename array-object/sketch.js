@@ -6,10 +6,14 @@
 // - describe what you did to take this project "above and beyond"
 
 let playerSize = 50;
-let spaceship;
+let spaceship = {
+  x: mouseX - playerSize / 2,
+  y: mouseY - playerSize / 2,
+};
 
 function preload() {
   spaceship = loadImage('spaceship.png');
+  spaceshipTrail = loadImage('spaceshipTrail.png');
 }
 
 function setup() {
@@ -19,6 +23,6 @@ function setup() {
 function draw() {
   background(0);
   
-  image(spaceship, mouseX - 50 / 2, mouseY - 50 / 2, 50, 50);
-  
+  image(spaceship, spaceship.x, spaceship.y, playerSize, playerSize);
+  image(spaceshipTrail);
 }

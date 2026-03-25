@@ -8,6 +8,7 @@
 - [2d Grid](07-grid)
 - [Rect Grid](08-rect-grid)
 - [Game of Life](09-life)
+- [Character in Grid](10-character)
 
 ## Assignments
 - [Interactive Scene](interactive-scene)
