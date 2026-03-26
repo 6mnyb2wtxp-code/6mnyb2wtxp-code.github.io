@@ -5,24 +5,39 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
-let playerSize = 50;
-let spaceship = {
-  x: mouseX - playerSize / 2,
-  y: mouseY - playerSize / 2,
-};
+let playerSize = 60;
+let x;
+let y;
+let speed;
+
+
 
 function preload() {
   spaceship = loadImage('spaceship.png');
-  spaceshipTrail = loadImage('spaceshipTrail.png');
+  spaceshipTrail = loadImage('spaceshipTrail.gif');
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  x = width/2;
+  y= 200;
+  speed= 3;
 };
+
 
 function draw() {
   background(0);
   
-  image(spaceship, spaceship.x, spaceship.y, playerSize, playerSize);
-  image(spaceshipTrail);
+
+  
+
+  image(spaceship, x - playerSize / 2, mouseY - playerSize / 2, playerSize, playerSize);
+  image(spaceshipTrail, x - playerSize/1.4 , mouseY + playerSize/4 , playerSize * 1.5, playerSize * 1.5);
+
+}
+
+function keyIsDown() {
+  if (key === 'a') {
+    x -= speed;
+  }
 }
