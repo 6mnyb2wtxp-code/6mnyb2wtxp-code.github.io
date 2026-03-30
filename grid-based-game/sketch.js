@@ -9,6 +9,7 @@ const CELL_SIZE = 50;
 const OPEN_TILE = 0;
 const IMPASSIBLE = 1;
 const PLAYER = 9;
+const GOAL = 5;
 let grid;
 let rows;
 let cols;
@@ -24,6 +25,7 @@ function preload() {
   grassImg = loadImage('crate.png');
   pathImg = loadImage("wood.jpg");
   playerImg = loadImage('player.webp');
+  goalImg = loadImage("goal.png");
 }
 
 function setup() {
@@ -63,10 +65,6 @@ function keyPressed() {
     breakAmount = 5;
     grid[thePlayer.y][thePlayer.x] = PLAYER;
   }
-  // if (key === "e") {
-  //   grid = generateEmptyGrid(cols, rows);
-  //   grid[thePlayer.y][thePlayer.x] = PLAYER;
-  // }
   if (key === "s") {
     movePlayer(thePlayer.x, thePlayer.y + 1);
   }
@@ -107,9 +105,6 @@ function toggleCell(x, y) {
       grid[y][x] = OPEN_TILE;
       breakAmount -= 1;
     }
-    // else if (grid[y][x] === OPEN_TILE) {
-    //   grid[y][x] = IMPASSIBLE;
-    // }
   }
 }
 
@@ -117,16 +112,16 @@ function displayGrid() {
   for (let y = 0; y < rows; y++) {
     for (let x = 0; x < cols; x++) {
       if (grid[y][x] === OPEN_TILE) {
-        // fill("white");
         image(pathImg, x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
       }
       if (grid[y][x] === IMPASSIBLE) {
-        // fill("black");
         image(grassImg, x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
       }
       if (grid[y][x] === PLAYER) {
-        fill("red");
         image(playerImg, x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+      }
+      if (grid[y][x] === GOAL){
+        image(goalImg, x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
       }
     }
   }
@@ -145,16 +140,6 @@ function generateRandomGrid(cols, rows) {
       }
     }
   }
+  grid[cols.length - 1][rows.length - 1] = GOAL;
   return newGrid;
 }
-
-// function generateEmptyGrid(cols, rows) {
-//   let newGrid = [];
-//   for (let y = 0; y < rows; y++) {
-//     newGrid.push([]);
-//     for (let x = 0; x < cols; x++) {
-//       newGrid[y].push(OPEN_TILE);
-//     }
-//   }
-//   return newGrid;
-// }
