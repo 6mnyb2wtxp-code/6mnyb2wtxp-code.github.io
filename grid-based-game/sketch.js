@@ -8,11 +8,15 @@
 const CELL_SIZE = 100;
 const OPEN_TILE = 0;
 const IMPASSIBLE = 1;
-const PLAYER = 9;
-const GOAL = 5;
+const PLAYER = 2;
+const GOAL = 3;
+const STAR = 4;
+
+const STARS = 3;
 let grid;
 let rows;
 let cols;
+
 let thePlayer = {
   x: 0,
   y: 0,
@@ -20,10 +24,11 @@ let thePlayer = {
 let breakAmount = 5;
 
 function preload() {
-  grassImg = loadImage('crate.png');
+  grassImg = loadImage("crate.png");
   pathImg = loadImage("wood.jpg");
-  playerImg = loadImage('player.webp');
+  playerImg = loadImage("player.webp");
   goalImg = loadImage("goal.png");
+  starImg = loadImage("star.png");
 }
 
 function setup() {
@@ -97,6 +102,11 @@ function movePlayer(x, y) {
       grid[oldY][oldX] = GOAL;
       win();
     }
+    if (tileType === STAR) {
+      grid[oldY][oldX] = OPEN_TILE;
+      // count picked up stars
+
+    }
   }
 }
 
@@ -126,6 +136,9 @@ function displayGrid() {
       if (grid[y][x] === GOAL){
         image(goalImg, x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
       }
+      if (grid[y][x] === STAR){
+        image(starImg, x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+      }
     }
   }
 }
@@ -134,6 +147,7 @@ function generateRandomGrid(cols, rows) {
   let newGrid = [];
   for (let y = 0; y < rows; y++) {
     newGrid.push([]);
+    addStars();
     for (let x = 0; x < cols; x++) {
       if (random(100) < 50) {
         newGrid[y].push(IMPASSIBLE);
@@ -143,8 +157,19 @@ function generateRandomGrid(cols, rows) {
       }
     }
   }
+  
+
   newGrid[rows - 1][cols - 1] = GOAL;
   return newGrid;
+}
+
+function addStars(STARS) {
+  let starsPlaced;
+  while (starsPlaced <= STARS) {
+    if (random(100) >= 5 && grid[y][x] === OPEN_TILE){
+      grid[y][x] = STAR;
+    }
+  }
 }
 
 function win() {
