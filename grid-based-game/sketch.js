@@ -5,7 +5,7 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
-const CELL_SIZE = 50;
+const CELL_SIZE = 100;
 const OPEN_TILE = 0;
 const IMPASSIBLE = 1;
 const PLAYER = 9;
@@ -17,8 +17,6 @@ let thePlayer = {
   x: 0,
   y: 0,
 };
-let grassImg;
-let pathImg;
 let breakAmount = 5;
 
 function preload() {
@@ -59,11 +57,7 @@ function mousePressed() {
 
 function keyPressed() {
   if (key === "r") {
-    grid = generateRandomGrid(cols, rows);
-    thePlayer.x = 0;
-    thePlayer.y = 0;
-    breakAmount = 5;
-    grid[thePlayer.y][thePlayer.x] = PLAYER;
+    resetGame();
   }
   if (key === "s") {
     movePlayer(thePlayer.x, thePlayer.y + 1);
@@ -80,7 +74,10 @@ function keyPressed() {
 }
 
 function movePlayer(x, y) {
-  if (x >= 0 && x < cols && y >= 0 && y < rows && grid[y][x] === OPEN_TILE) {
+  if (x >= 0 && x < cols && y >= 0 && y < rows && (grid[y][x] === OPEN_TILE || grid[y][x] === GOAL)) {
+    //tile previously stepped on
+    let tileType = grid[y][x];
+    
     //previous position
     let oldX = thePlayer.x;
     let oldY = thePlayer.y;
@@ -93,7 +90,13 @@ function movePlayer(x, y) {
     grid[thePlayer.y][thePlayer.x] = PLAYER;
 
     //reset the old location to be an open tile
-    grid[oldY][oldX] = OPEN_TILE;
+    if (tileType === OPEN_TILE) {
+      grid[oldY][oldX] = OPEN_TILE;
+    }
+    if (tileType === GOAL) {
+      grid[oldY][oldX] = GOAL;
+      win();
+    }
   }
 }
 
@@ -140,6 +143,19 @@ function generateRandomGrid(cols, rows) {
       }
     }
   }
-  grid[cols.length - 1][rows.length - 1] = GOAL;
+  newGrid[rows - 1][cols - 1] = GOAL;
   return newGrid;
+}
+
+function win() {
+  alert("You win!");
+  resetGame();
+}
+
+function resetGame() {
+  grid = generateRandomGrid(cols, rows);
+  thePlayer.x = 0;
+  thePlayer.y = 0;
+  breakAmount = 5;
+  grid[thePlayer.y][thePlayer.x] = PLAYER;
 }
