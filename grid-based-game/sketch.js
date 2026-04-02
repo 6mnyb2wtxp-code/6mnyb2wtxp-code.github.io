@@ -22,6 +22,7 @@ let thePlayer = {
   y: 0,
 };
 let breakAmount = 5;
+let pickedUpStars = 0;
 
 function preload() {
   grassImg = loadImage("crate.png");
@@ -105,7 +106,7 @@ function movePlayer(x, y) {
     if (tileType === STAR) {
       grid[oldY][oldX] = OPEN_TILE;
       // count picked up stars
-
+      pickedUpStars += 1;
     }
   }
 }
@@ -147,7 +148,6 @@ function generateRandomGrid(cols, rows) {
   let newGrid = [];
   for (let y = 0; y < rows; y++) {
     newGrid.push([]);
-    addStars();
     for (let x = 0; x < cols; x++) {
       if (random(100) < 50) {
         newGrid[y].push(IMPASSIBLE);
@@ -155,6 +155,7 @@ function generateRandomGrid(cols, rows) {
       else {
         newGrid[y].push(OPEN_TILE);
       }
+      addStars();
     }
   }
   
@@ -164,10 +165,11 @@ function generateRandomGrid(cols, rows) {
 }
 
 function addStars(STARS) {
-  let starsPlaced;
+  let starsPlaced = 0;
   while (starsPlaced <= STARS) {
-    if (random(100) >= 5 && grid[y][x] === OPEN_TILE){
+    if (random(100) <= 5 && grid[y][x] === OPEN_TILE){
       grid[y][x] = STAR;
+      starsPlaced += 1;
     }
   }
 }
@@ -182,5 +184,6 @@ function resetGame() {
   thePlayer.x = 0;
   thePlayer.y = 0;
   breakAmount = 5;
+  pickedUpStars = 0;
   grid[thePlayer.y][thePlayer.x] = PLAYER;
 }
