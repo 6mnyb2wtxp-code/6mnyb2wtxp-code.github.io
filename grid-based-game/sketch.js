@@ -3,7 +3,7 @@
 // Date
 //
 // Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+// - Added stars randomly around the map can be picked up by the player
 
 const CELL_SIZE = 100;
 const OPEN_TILE = 0;
@@ -46,9 +46,17 @@ function draw() {
   background(0);
   displayGrid();
 
+  showText();
+}
+
+function showText() {
   textSize(25);
   fill("white");
   text(`Breaking Energy: ${breakAmount}`, 10, height - 10);
+
+  textSize(25);
+  fill("white");
+  text(`Stars Picked Up: ${pickedUpStars}`, width - 300, height - 10);
 }
 
 function mousePressed() {
@@ -80,7 +88,7 @@ function keyPressed() {
 }
 
 function movePlayer(x, y) {
-  if (x >= 0 && x < cols && y >= 0 && y < rows && (grid[y][x] === OPEN_TILE || grid[y][x] === GOAL)) {
+  if (x >= 0 && x < cols && y >= 0 && y < rows && (grid[y][x] === OPEN_TILE || grid[y][x] === GOAL || grid[y][x] === STAR)) {
     //tile previously stepped on
     let tileType = grid[y][x];
     
@@ -99,14 +107,14 @@ function movePlayer(x, y) {
     if (tileType === OPEN_TILE) {
       grid[oldY][oldX] = OPEN_TILE;
     }
-    if (tileType === GOAL) {
+    else if (tileType === GOAL) {
       grid[oldY][oldX] = GOAL;
       win();
     }
-    if (tileType === STAR) {
+    else if (tileType === STAR) {
       grid[oldY][oldX] = OPEN_TILE;
       // count picked up stars
-      pickedUpStars += 1;
+      pickedUpStars++;
     }
   }
 }
@@ -155,27 +163,30 @@ function generateRandomGrid(cols, rows) {
       else {
         newGrid[y].push(OPEN_TILE);
       }
-      addStars();
     }
   }
-  
 
   newGrid[rows - 1][cols - 1] = GOAL;
+  addStars(newGrid);
   return newGrid;
 }
 
-function addStars(STARS) {
+function addStars(grid) {
   let starsPlaced = 0;
-  while (starsPlaced <= STARS) {
-    if (random(100) <= 5 && grid[y][x] === OPEN_TILE){
+  while (starsPlaced < STARS) {
+
+    let x = Math.floor(random(cols));
+    let y = Math.floor(random(rows));
+
+    if (grid[y][x] === OPEN_TILE){
       grid[y][x] = STAR;
-      starsPlaced += 1;
+      starsPlaced++;
     }
   }
 }
 
 function win() {
-  alert("You win!");
+  alert(`You Reached the end with ${pickedUpStars} stars!`);
   resetGame();
 }
 
