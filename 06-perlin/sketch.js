@@ -22,5 +22,5 @@ function draw() {
   let y = noise(time + 1000)*height;
   circle(x, y , 50);
 
-  time += 0.001;
+  time += 0.002;
 }
