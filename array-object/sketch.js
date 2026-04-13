@@ -6,7 +6,7 @@
 // - describe what you did to take this project "above and beyond"
 
 let playerSize = 60;
-let enemySize = 50;
+// let enemySize = 50;
 
 let x;
 let y;
@@ -41,7 +41,8 @@ function setup() {
     let enemy = {
       x: random(width),
       y: random(height/2),
-      t: random(1000)
+      t: random(1000),
+      size: random(25, 100)
     };
 
     enemies.push(enemy);
@@ -66,6 +67,7 @@ function keyPressed() {
 }
 
 function draw() {
+  //detectCollisions();
   background(0);
   moveObjects();
   displayObjects();
@@ -129,12 +131,24 @@ function displayObjects() {
   image(spaceshipTrail, x - playerSize/1.4 , y + playerSize/4 , playerSize * 1.5, playerSize * 1.5);
   
   for (let enemy of enemies) {
-    image(invader, enemy.x - enemySize/2, enemy.y - enemySize/2, enemySize, enemySize);
+    image(invader, enemy.x - enemy.size/2, enemy.y - enemy.size/2, enemy.size, enemy.size);
   }
   for (let bullet of bullets) {
     fill(255, 0, 0);
     noStroke();
     rect(bullet.x - 5, bullet.y - 5, 5, 20);
+  }
+}
+
+function detectCollisions() {
+  // check if collisions happen 
+  if (enemy.x + enemy.size >= x &&
+    enemy.x <= x + playerSize &&
+    enemy.y + enemy.size >= y &&
+    enemy.y <= y + playerSize
+  ){
+    let hit = true;
+    console.log(hit);
   }
 }
 
