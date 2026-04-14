@@ -6,6 +6,8 @@
 // - describe what you did to take this project "above and beyond"
 
 let playerSize = 60;
+let health = 3;
+let startingHealth = health;
 
 let x;
 let y;
@@ -93,7 +95,7 @@ function draw() {
 }
 
 function displayUI() {
-  // Display boost cooldown indicator
+  // display boost cooldown indicator
   let cooldownRatio = (millis() - lastBoostTime) / boostCooldown;
   cooldownRatio = constrain(cooldownRatio, 0, 1);
   fill(255);
@@ -102,12 +104,21 @@ function displayUI() {
   stroke(255);
   rect(20, height - 40, 100, 20);
 
-  // Display score
+  // display health bar
+  let healthRatio = health / startingHealth;
+  healthRatio = constrain(healthRatio, 0, 1);
+  fill(255, 0, 0);
+  rect(20, height - 120, 100 * healthRatio, 20);
+  noFill();
+  stroke(255);
+  rect(20, height - 120, 100, 20);
+
+  // display score
   textAlign(LEFT, TOP);
   fill(255);
   textSize(24);
   text("Score: " + score, 20, 30);
-  // Display high score
+  // display high score
   let highScore = localStorage.getItem("highScore") || 0;
   text("High Score: " + highScore, 20, 60);
 
