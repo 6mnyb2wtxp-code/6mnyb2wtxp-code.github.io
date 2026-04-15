@@ -261,7 +261,7 @@ function checkCollisions() {
       let bullet = bullets[j];
       let d = dist(enemy.x, enemy.y, bullet.x, bullet.y); //distance between enemy and bullet
       if (d < enemy.size/2) {
-        // Collision detected remove enemy and bullet aand increase score
+        // Collision detected remove enemy and bullet and increase score
         enemy.health -= 1; 
         bullets.splice(j, 1);
         enemyDamage.play();

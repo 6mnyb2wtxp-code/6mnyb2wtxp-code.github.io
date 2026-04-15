@@ -10,6 +10,7 @@
 - [Game of Life](09-life)
 - [Character in Grid](10-character)
 - [Walker OOP](12-walker)
+- [Fireworks OOP](13-fireworks)
 
 ## Assignments
 - [Interactive Scene](interactive-scene)
