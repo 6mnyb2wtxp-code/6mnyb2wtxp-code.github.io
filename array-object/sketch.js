@@ -104,15 +104,6 @@ function displayUI() {
   stroke(255);
   rect(20, height - 40, 100, 20);
 
-  // display health bar
-  let healthRatio = health / startingHealth;
-  healthRatio = constrain(healthRatio, 0, 1);
-  fill(255, 0, 0);
-  rect(20, height - 120, 100 * healthRatio, 20);
-  noFill();
-  stroke(255);
-  rect(20, height - 120, 100, 20);
-
   // display score
   textAlign(LEFT, TOP);
   fill(255);
