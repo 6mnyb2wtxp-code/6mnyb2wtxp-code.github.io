@@ -16,6 +16,7 @@
 - [OOP Inheritance](16-inheritance)
 - [Colide2d Demo](17-collide)
 - [Recursive Circles](18-recursion)
+- [Recursive Triangle](19-triangle)
 
 ## Assignments
 - [Interactive Scene](interactive-scene)

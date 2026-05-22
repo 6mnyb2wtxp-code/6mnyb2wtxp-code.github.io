@@ -14,13 +14,13 @@ function setup() {
 }
 
 function draw() {
-  background(220);
+  //background(220);
 
   fill("black");
 
   let x = noise(time)*width;
   let y = noise(time + 1000)*height;
-  circle(x, y , 50);
+  circle(x, y , 5);
 
   time += 0.002;
 }
